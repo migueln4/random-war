@@ -43,10 +43,10 @@ public class Simulation {
     }
 
     private void imprimirMasPuntos(String ganador, Double puntos) {
-      this.resultados.put(ganador,puntos);
-      for(String key : this.resultados.keySet()) {
-          System.out.println(key+" -> "+this.resultados.get(key)+" puntos");
-      }
+        this.resultados.put(ganador,puntos);
+        for(String key : this.resultados.keySet()) {
+            System.out.println(key+" -> "+this.resultados.get(key)+" puntos");
+        }
     }
 
     private void ajustarPuntos(String atacante, String atacado) {
