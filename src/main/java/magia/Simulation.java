@@ -16,12 +16,14 @@ public class Simulation {
     private Map<String, Double> resultados;
     private List<String> participantes;
     private static int ronda;
+    private List<String> listaCausas;
 
     public Simulation(List<String> participantes) {
         ronda = 1;
         this.combatientes = new HashMap<>();
         this.resultados = new HashMap<>();
         this.participantes = participantes;
+        this.listaCausas = new ArrayList<>(getCausas());
         participantes.stream().forEach(str -> this.combatientes.put(str, 1.0));
         simulate();
     }
@@ -31,7 +33,7 @@ public class Simulation {
             System.out.println("RONDA: "+ronda);
             String atacante = elegirAtacante();
             String atacado = elegirAtacado(atacante);
-            System.out.println(atacante + "(" + this.combatientes.get(atacante) + " p.)" + " derrota a " + atacado + "(" + this.combatientes.get(atacado) + " p.)");
+            System.out.println(atacante + "(" + this.combatientes.get(atacante) + " p.)" + " mata a " + atacado + "(" + this.combatientes.get(atacado) + " p.) "+getCausaMuerte());
             ajustarPuntos(atacante, atacado);
             ronda++;
         }
@@ -92,6 +94,36 @@ public class Simulation {
         }
         int rnd = (int) (Math.random() * (posibles.size() - 1));
         return posibles.get(rnd);
+    }
+
+    private String getCausaMuerte() {
+        int rnd = (int) (Math.random() * this.listaCausas.size());
+        String causa = this.listaCausas.get(rnd);
+        this.listaCausas.remove(rnd);
+        return causa;
+    }
+
+    private List<String> getCausas() {
+        List<String> lista = new ArrayList<>();
+        lista.add("con la navaja de la vendimia.");
+        lista.add("lanzando una Onda Vital.");
+        lista.add("porque tenía la carta del Hombre Lobo y es su naturaleza.");
+        lista.add("con más veneno que Mitrídates.");
+        lista.add("usando el ataque Impactrueno.");
+        lista.add("con un estacazo.");
+        lista.add("con nocturnidad y alevosía.");
+        lista.add("con una cepa chinorris del coronavirus.");
+        lista.add("¡por el poder de Grey Skull!");
+        lista.add("con una patada voladora.");
+        lista.add("por alguna clase de venganza.");
+        lista.add("con un rayaco.");
+        lista.add("de aburrimiento.");
+        lista.add("usando su Cuaderno de la Muerte.");
+        lista.add("simplemente, usando el comando Atacar del mando.");
+        lista.add("siguiendo los consejos del Doctor Muerte.");
+        lista.add("con kryptonita en mal estado.");
+        lista.add("extirpando su hígado y comiéndoselo con patatas fritas.");
+        return lista;
     }
 
 }
